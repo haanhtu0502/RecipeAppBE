@@ -1,8 +1,9 @@
 import express from "express";
 var router = express.Router();
 import Recipe from "../models/Recipe.js";
+import Category from "../models/Category.js";
+import { getAllRecipe } from "../controllers/recipeController.js";
 
-/* GET users listing. */
 router.post("/", async (req, res, next) => {
   const newRecipe = new Recipe(req.body);
 
@@ -14,13 +15,17 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/", async (req, res, next) => {
+router.post("/category", async (req, res, next) => {
+  const newCategory = new Category(req.body);
   try {
-    const recipes = await Recipe.find().populate("ingredients.ingredient");
-    res.status(200).json(recipes);
+    const savedCategory = await newCategory.save();
+    res.status(200).json(savedCategory);
   } catch (error) {
+    res.send("error");
     res.status(500).json(error);
   }
 });
+
+router.get("/", getAllRecipe);
 
 export default router;

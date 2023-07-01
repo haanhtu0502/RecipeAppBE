@@ -16,9 +16,11 @@ const RecipeSchema = new mongoose.Schema(
     img: {
       type: String,
     },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
     status: {
       type: String,
       enum: ["pending", "accepted", "rejected"],
+      default: "pending",
     },
     ingredients: [
       {

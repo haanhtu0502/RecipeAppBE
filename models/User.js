@@ -38,8 +38,8 @@ const UserSchema = new mongoose.Schema(
     favoriteRecipe: [
       {
         recipe: { type: mongoose.Schema.Types.ObjectId, ref: "Recipe" },
-        date: Date,
-        meal: { type: String, enum: ["Breakfast", "Lunch", "Dinner"] },
+        date: String,
+        meal: { type: String, enum: ["Breakfast", "Lunch", "Dinner,''"] },
       },
     ],
   },
