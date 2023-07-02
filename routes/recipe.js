@@ -2,7 +2,10 @@ import express from "express";
 var router = express.Router();
 import Recipe from "../models/Recipe.js";
 import Category from "../models/Category.js";
-import { getAllRecipe } from "../controllers/recipeController.js";
+import {
+  getAllRecipe,
+  getRecipeById,
+} from "../controllers/recipeController.js";
 
 router.post("/", async (req, res, next) => {
   const newRecipe = new Recipe(req.body);
@@ -27,5 +30,7 @@ router.post("/category", async (req, res, next) => {
 });
 
 router.get("/", getAllRecipe);
+
+router.get("/:id", getRecipeById);
 
 export default router;
