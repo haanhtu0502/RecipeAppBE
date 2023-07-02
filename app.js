@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/users.js";
 import authRoute from "./routes/auth.js";
+import categoryRoute from "./routes/category.js";
 import recipeRoute from "./routes/recipe.js";
 import ingredientRoute from "./routes/ingredient.js";
 import { MongoClient, ServerApiVersion } from "mongodb";
@@ -66,6 +67,7 @@ app.use("/user", userRoute);
 app.use("/auth", authRoute);
 app.use("/recipe", recipeRoute);
 app.use("/ingredient", ingredientRoute);
+app.use("/category", categoryRoute);
 
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
