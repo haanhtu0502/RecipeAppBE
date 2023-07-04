@@ -14,4 +14,13 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.get("/", async (req, res, next) => {
+  try {
+    const savedIngredient = await Ingredient.find();
+    res.status(200).json(savedIngredient);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 export default router;
