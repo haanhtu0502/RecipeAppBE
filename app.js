@@ -73,7 +73,7 @@ app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
   const errMess = err.message || "Something wrong!!";
   return res.status(errStatus).json({
-    sucess: false,
+    success: false,
     status: errStatus,
     message: errMess,
     stack: err.stack,
