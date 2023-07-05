@@ -1,5 +1,6 @@
 import { createError } from "../utils/error.js";
 import Recipe from "../models/Recipe.js";
+import User from "../models/User.js";
 
 export const getAllRecipe = async (req, res, next) => {
   try {
@@ -46,6 +47,18 @@ export const getAllRecipe = async (req, res, next) => {
     };
 
     res.status(200).json(respond);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getRecipeOwner = async (req, res, next) => {
+  const recipeId = req.params.id;
+  try {
+    const owner = await User.find({
+      createdRecipe: { $in: [recipeId] },
+    });
+    res.status(200).json({ success: true, owner: owner });
   } catch (error) {
     next(error);
   }

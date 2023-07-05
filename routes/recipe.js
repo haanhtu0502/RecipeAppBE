@@ -5,6 +5,7 @@ import Category from "../models/Category.js";
 import {
   getAllRecipe,
   getRecipeById,
+  getRecipeOwner,
 } from "../controllers/recipeController.js";
 import User from "../models/User.js";
 
@@ -28,7 +29,7 @@ router.post("/:userId", async (req, res, next) => {
 
     res.status(200).json(respond);
   } catch (error) {
-    res.status(500).json(error);
+    next(error);
   }
 });
 
@@ -44,6 +45,8 @@ router.post("/category", async (req, res, next) => {
 });
 
 router.get("/", getAllRecipe);
+
+router.get("/owner/:id", getRecipeOwner);
 
 router.get("/:id", getRecipeById);
 
