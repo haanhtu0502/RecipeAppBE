@@ -6,13 +6,27 @@ import {
   getAllRecipe,
   getRecipeById,
 } from "../controllers/recipeController.js";
+import User from "../models/User.js";
 
-router.post("/", async (req, res, next) => {
+//create recipe
+router.post("/:userId", async (req, res, next) => {
+  const userId = req.params.userId;
   const newRecipe = new Recipe(req.body);
-
   try {
-    const savedRecipe = await newRecipe.save();
-    res.status(200).json(savedRecipe);
+    const recipeInfo = await newRecipe.save();
+
+    const user = await User.updateOne(
+      { _id: userId },
+      { $push: { createdRecipe: recipeInfo._id } }
+    );
+
+    const respond = {
+      success: true,
+      message: "Recipe sucessfully created !",
+      recipe: recipeInfo,
+    };
+
+    res.status(200).json(respond);
   } catch (error) {
     res.status(500).json(error);
   }

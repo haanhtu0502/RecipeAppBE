@@ -13,7 +13,7 @@ export const addRecipeToFavourite = async (req, res, next) => {
       { $push: { favoriteRecipe: favRecipe } }
     );
     const respond = {
-      succes: true,
+      success: true,
       message: "Add to favourite successfully !",
     };
 
