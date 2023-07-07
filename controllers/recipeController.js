@@ -99,3 +99,20 @@ export const getAllPendingRecipe = async (req, res, next) => {
     next(error);
   }
 };
+
+export const changeRecipeStatus = async (req, res, next) => {
+  const { recipeId, status } = req.body;
+  try {
+    const recipe = await Recipe.findOneAndUpdate(
+      { _id: recipeId },
+      {
+        $set: {
+          status: status,
+        },
+      }
+    );
+    res.status(200).json({ success: true, message: "Update successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
