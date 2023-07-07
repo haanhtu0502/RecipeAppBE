@@ -3,6 +3,7 @@ var router = express.Router();
 import Recipe from "../models/Recipe.js";
 import Category from "../models/Category.js";
 import {
+  getAllPendingRecipe,
   getAllRecipe,
   getRecipeById,
   getRecipeOwner,
@@ -45,6 +46,8 @@ router.post("/category", async (req, res, next) => {
 });
 
 router.get("/", getAllRecipe);
+
+router.get("/pending", getAllPendingRecipe);
 
 router.get("/owner/:id", getRecipeOwner);
 

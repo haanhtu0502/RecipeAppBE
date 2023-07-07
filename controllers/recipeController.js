@@ -77,3 +77,25 @@ export const getRecipeById = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAllPendingRecipe = async (req, res, next) => {
+  try {
+    let users = await User.find({}).populate("createdRecipe");
+
+    users = users
+      .map((user) => {
+        if (user.createdRecipe.length > 0) {
+          user.createdRecipe = user.createdRecipe.filter(
+            (recipe) => recipe.status === "pending"
+          );
+        }
+
+        return user;
+      })
+      .filter((item) => item.createdRecipe.length > 0);
+
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
