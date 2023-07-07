@@ -70,3 +70,17 @@ export const getUserById = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateUserProfile = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const updateUser = await User.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updateUser);
+  } catch (error) {
+    next(error);
+  }
+};

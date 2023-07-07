@@ -6,6 +6,7 @@ import {
   getUserById,
   removeRecipeFromFavourite,
   setDateAndMeal,
+  updateUserProfile,
 } from "../controllers/userController.js";
 
 /* GET users listing. */
@@ -27,6 +28,8 @@ router.post("/favourite", addRecipeToFavourite);
 router.delete("/favourite", removeRecipeFromFavourite);
 
 router.put("/favourite", setDateAndMeal);
+
+router.put("/:id", updateUserProfile);
 
 router.get("/:id", getUserById);
 
