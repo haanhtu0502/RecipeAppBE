@@ -13,6 +13,7 @@ export const getAllRecipe = async (req, res, next) => {
     if (category == "") {
       recipes = await Recipe.find({
         name: { $regex: search, $options: "i" },
+        status: "accepted",
       })
         .populate(["ingredients.ingredient", "category"])
         .skip(page * limit)
@@ -24,6 +25,7 @@ export const getAllRecipe = async (req, res, next) => {
     } else {
       recipes = await Recipe.find({
         name: { $regex: search, $options: "i" },
+        status: "accepted",
       })
         .populate(["ingredients.ingredient", "category"])
         .where("category")
