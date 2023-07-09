@@ -4,6 +4,7 @@ import Recipe from "../models/Recipe.js";
 import Category from "../models/Category.js";
 import {
   changeRecipeStatus,
+  deleteRecipe,
   getAllPendingRecipe,
   getAllRecipe,
   getRecipeById,
@@ -55,5 +56,7 @@ router.put("/status", changeRecipeStatus);
 router.get("/owner/:id", getRecipeOwner);
 
 router.get("/:id", getRecipeById);
+
+router.delete("/", deleteRecipe);
 
 export default router;

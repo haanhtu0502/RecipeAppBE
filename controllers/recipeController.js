@@ -118,3 +118,17 @@ export const changeRecipeStatus = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteRecipe = async (req, res, next) => {
+  const { recipeId, userId } = req.body;
+  try {
+    await Recipe.findByIdAndDelete(recipeId);
+    const user = await User.updateOne(
+      { _id: userId },
+      { $pull: { createdRecipe: recipeId } }
+    );
+    res.status(200).json({ succes: true, message: "Delete Successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
