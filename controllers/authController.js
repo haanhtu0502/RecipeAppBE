@@ -49,7 +49,7 @@ export const login = async (req, res, next) => {
 };
 
 export const loginWithGoogle = async (req, res, next) => {
-  const { email, username } = req.body;
+  const { email, username, img } = req.body;
   try {
     const user = await User.findOne({ email: email });
     if (user) {
@@ -57,7 +57,7 @@ export const loginWithGoogle = async (req, res, next) => {
       return;
     }
     if (!user) {
-      const newUser = new User({ username: username, email: email });
+      const newUser = new User({ username: username, email: email, img: img });
       const createUser = await newUser.save();
       res.status(200).json({ success: true, userInfo: createUser });
     }
