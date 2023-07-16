@@ -5,6 +5,7 @@ import Category from "../models/Category.js";
 import {
   changeRecipeStatus,
   deleteRecipe,
+  editRecipe,
   getAllPendingRecipe,
   getAllRecipe,
   getRecipeById,
@@ -56,6 +57,8 @@ router.put("/status", changeRecipeStatus);
 router.get("/owner/:id", getRecipeOwner);
 
 router.get("/:id", getRecipeById);
+
+router.put("/:id", editRecipe);
 
 router.delete("/", deleteRecipe);
 

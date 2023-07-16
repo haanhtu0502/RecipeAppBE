@@ -132,3 +132,17 @@ export const deleteRecipe = async (req, res, next) => {
     next(error);
   }
 };
+
+export const editRecipe = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const updateRecipe = await Recipe.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updateRecipe);
+  } catch (error) {
+    next(error);
+  }
+};
